@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Check, Copy, Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Kbd } from "./Kbd";
+import { useHotkey } from "@/hooks/use-hotkey";
 
 interface OutputPanelProps {
   title: string;
@@ -37,6 +39,8 @@ export function OutputPanel({
     setTimeout(() => setCopied(false), 1800);
   };
 
+  useHotkey(copy, { key: "c", meta: true, shift: true, enabled: !!value && !loading });
+
   return (
     <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -44,10 +48,13 @@ export function OutputPanel({
           <h2 className="text-sm font-semibold tracking-tight text-foreground">{title}</h2>
           <p className="mt-1 text-xs text-muted-foreground">{description}</p>
         </div>
-        <Button variant="outline" size="sm" onClick={copy} disabled={!value || loading}>
-          {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-          {copied ? "Copied" : "Copy"}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Kbd combo="Mod+Shift+C" />
+          <Button variant="outline" size="sm" onClick={copy} disabled={!value || loading}>
+            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+            {copied ? "Copied" : "Copy"}
+          </Button>
+        </div>
       </div>
 
       {error ? (
