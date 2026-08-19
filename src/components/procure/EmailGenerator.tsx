@@ -105,10 +105,15 @@ export function EmailGenerator() {
             />
           </div>
 
-          <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
-            {loading ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />}
-            {loading ? "Generating…" : "Generate email"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
+              {loading ? <Loader2 className="size-4 animate-spin" /> : <Wand2 className="size-4" />}
+              {loading ? "Generating…" : "Generate email"}
+            </Button>
+            <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Kbd combo="Mod+Enter" /> to generate
+            </span>
+          </div>
         </div>
       </section>
 
