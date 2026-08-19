@@ -14,6 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OutputPanel } from "./OutputPanel";
+import { Kbd } from "./Kbd";
+import { useHotkey } from "@/hooks/use-hotkey";
 
 export function EmailGenerator() {
   const run = useServerFn(generateAi);
