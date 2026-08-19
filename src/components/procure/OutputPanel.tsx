@@ -39,6 +39,8 @@ export function OutputPanel({
     setTimeout(() => setCopied(false), 1800);
   };
 
+  useHotkey(copy, { key: "c", meta: true, shift: true, enabled: !!value && !loading });
+
   return (
     <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
