@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Check, Copy, Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Kbd } from "./Kbd";
+import { useHotkey } from "@/hooks/use-hotkey";
 
 interface OutputPanelProps {
   title: string;
