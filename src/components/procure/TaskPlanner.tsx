@@ -13,8 +13,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { OutputPanel } from "./OutputPanel";
-import { Kbd } from "./Kbd";
-import { useHotkey } from "@/hooks/use-hotkey";
 
 export function TaskPlanner() {
   const run = useServerFn(generateAi);
@@ -76,19 +74,14 @@ export function TaskPlanner() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
-              {loading ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <CalendarClock className="size-4" />
-              )}
-              {loading ? "Planning…" : "Build schedule"}
-            </Button>
-            <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Kbd combo="Mod+Enter" /> to generate
-            </span>
-          </div>
+          <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
+            {loading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <CalendarClock className="size-4" />
+            )}
+            {loading ? "Planning…" : "Build schedule"}
+          </Button>
         </div>
       </section>
 

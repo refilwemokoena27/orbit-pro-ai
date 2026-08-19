@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { OutputPanel } from "./OutputPanel";
-import { Kbd } from "./Kbd";
-import { useHotkey } from "@/hooks/use-hotkey";
 
 export function NotesSummarizer() {
   const run = useServerFn(generateAi);
@@ -53,19 +51,10 @@ export function NotesSummarizer() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
-              {loading ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <FileText className="size-4" />
-              )}
-              {loading ? "Summarizing…" : "Summarize notes"}
-            </Button>
-            <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Kbd combo="Mod+Enter" /> to generate
-            </span>
-          </div>
+          <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
+            {loading ? <Loader2 className="size-4 animate-spin" /> : <FileText className="size-4" />}
+            {loading ? "Summarizing…" : "Summarize notes"}
+          </Button>
         </div>
       </section>
 
