@@ -48,10 +48,13 @@ export function OutputPanel({
           <h2 className="text-sm font-semibold tracking-tight text-foreground">{title}</h2>
           <p className="mt-1 text-xs text-muted-foreground">{description}</p>
         </div>
-        <Button variant="outline" size="sm" onClick={copy} disabled={!value || loading}>
-          {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-          {copied ? "Copied" : "Copy"}
-        </Button>
+        <div className="flex items-center gap-2">
+          <Kbd combo="Mod+Shift+C" />
+          <Button variant="outline" size="sm" onClick={copy} disabled={!value || loading}>
+            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+            {copied ? "Copied" : "Copy"}
+          </Button>
+        </div>
       </div>
 
       {error ? (
