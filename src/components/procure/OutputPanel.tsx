@@ -46,8 +46,8 @@ function Shimmer({ className }: { className?: string }) {
 
 function confidenceFor(text: string) {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
-  if (words >= 120) return { level: "High", tone: "text-emerald-600" };
-  if (words >= 45) return { level: "Medium", tone: "text-amber-600" };
+  if (words >= 120) return { level: "High", tone: "text-success" };
+  if (words >= 45) return { level: "Medium", tone: "text-warning" };
   return { level: "Low", tone: "text-muted-foreground" };
 }
 
