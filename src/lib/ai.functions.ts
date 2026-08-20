@@ -83,11 +83,14 @@ Rules:
 - Order by urgency and any deadlines stated in the task text, NOT by input order.
 - Never invent deadlines. Only mention a deadline if the task text contains one.
 - ${data.timeframe === "This Week" ? "Group by weekday (Monday to Friday), distributing work realistically." : "Group into Morning, Midday and Afternoon blocks for today."}
-- For each task show: task name — Priority: High/Medium/Low — Why: one short rationale.
+- Mark each task with a priority indicator: 🔴 High Priority, 🟡 Medium Priority or 🟢 Low Priority.
+- Add a short 2-3 word label such as "Urgent deadline", "Quick win", "Low impact", "Blocking others" or "Routine follow-up".
+- Leave one blank line between groups so the plan is easy to scan.
 
 Format:
 <Group heading>
-- <task> — Priority: <level> — Why: <short reason>
+- 🔴 High Priority — <task> — Urgent deadline — Why: <short reason>
+- 🟡 Medium Priority — <task> — Quick win — Why: <short reason>
 
 End with a short line "Focus first:" naming the single most urgent task.`;
   }
