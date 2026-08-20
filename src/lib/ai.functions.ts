@@ -28,7 +28,13 @@ const NotesInput = z.object({
   notes: z.string(),
 });
 
-const Input = z.discriminatedUnion("kind", [EmailInput, PlannerInput, NotesInput]);
+const RefineInput = z.object({
+  kind: z.literal("refine"),
+  mode: z.enum(["improve", "shorten", "expand"]),
+  text: z.string().min(1),
+});
+
+const Input = z.discriminatedUnion("kind", [EmailInput, PlannerInput, NotesInput, RefineInput]);
 type Input = z.infer<typeof Input>;
 
 function buildPrompt(data: Input): string {
@@ -51,6 +57,22 @@ Subject: <concise subject line>
 Adapt wording and warmth to the ${data.tone} tone and to a ${data.recipientType} audience.`;
   }
 
+  if (data.kind === "refine") {
+    const instruction =
+      data.mode === "improve"
+        ? "Rewrite it to be clearer, sharper and more professional. Keep the same structure, headings and meaning."
+        : data.mode === "shorten"
+          ? "Rewrite it to be roughly 40% shorter while keeping every important point, heading and structure."
+          : "Expand it with more helpful professional detail and context, keeping the same structure and headings. Do not invent facts, numbers, names or deadlines.";
+    return `Here is an existing draft produced for a procurement professional.
+
+DRAFT:
+${data.text}
+
+${instruction}
+Return only the rewritten draft, nothing else.`;
+  }
+
   if (data.kind === "planner") {
     return `Turn this task list into a realistic, prioritized schedule for the timeframe: ${data.timeframe}.
 
@@ -61,11 +83,14 @@ Rules:
 - Order by urgency and any deadlines stated in the task text, NOT by input order.
 - Never invent deadlines. Only mention a deadline if the task text contains one.
 - ${data.timeframe === "This Week" ? "Group by weekday (Monday to Friday), distributing work realistically." : "Group into Morning, Midday and Afternoon blocks for today."}
-- For each task show: task name — Priority: High/Medium/Low — Why: one short rationale.
+- Mark each task with a priority indicator: 🔴 High Priority, 🟡 Medium Priority or 🟢 Low Priority.
+- Add a short 2-3 word label such as "Urgent deadline", "Quick win", "Low impact", "Blocking others" or "Routine follow-up".
+- Leave one blank line between groups so the plan is easy to scan.
 
 Format:
 <Group heading>
-- <task> — Priority: <level> — Why: <short reason>
+- 🔴 High Priority — <task> — Urgent deadline — Why: <short reason>
+- 🟡 Medium Priority — <task> — Quick win — Why: <short reason>
 
 End with a short line "Focus first:" naming the single most urgent task.`;
   }
@@ -87,6 +112,7 @@ Decisions & Deadlines
 - <decision or deadline>
 
 Rules:
+- Separate each section with a blank line, and put the heading on its own line.
 - Extract only what is present in the notes. Do not fabricate anything.
 - If no deadlines are mentioned, write exactly: No deadlines specified
 - If there are no action items, write: No action items identified`;

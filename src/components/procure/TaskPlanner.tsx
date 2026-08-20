@@ -12,7 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { OutputPanel } from "./OutputPanel";
+import { OutputPanel, type RefineMode } from "./OutputPanel";
+
+const LEGEND = [
+  { dot: "🔴", label: "High Priority", hint: "Urgent deadline" },
+  { dot: "🟡", label: "Medium Priority", hint: "Quick win" },
+  { dot: "🟢", label: "Low Priority", hint: "Low impact" },
+];
 
 export function TaskPlanner() {
   const run = useServerFn(generateAi);
@@ -39,13 +45,38 @@ export function TaskPlanner() {
     }
   };
 
+  const refine = async (mode: RefineMode) => {
+    if (!output.trim()) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await run({ data: { kind: "refine" as const, mode, text: output } });
+      setOutput(res.text);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="grid gap-6 lg:grid-cols-2">
-      <section className="rounded-xl border border-border bg-card p-5 sm:p-6">
+      <section className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-shadow duration-300 hover:shadow-md sm:p-6">
         <h2 className="text-sm font-semibold tracking-tight text-foreground">Your tasks</h2>
         <p className="mt-1 text-xs text-muted-foreground">
           One task per line. Include deadlines inline if you have them.
         </p>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {LEGEND.map((l) => (
+            <span
+              key={l.label}
+              className="rounded-full border border-border bg-muted/40 px-3 py-1 text-[11px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            >
+              {l.dot} {l.label} · {l.hint}
+            </span>
+          ))}
+        </div>
 
         <div className="mt-5 space-y-4">
           <div className="space-y-2 sm:max-w-56">
@@ -74,7 +105,11 @@ export function TaskPlanner() {
             />
           </div>
 
-          <Button onClick={generate} disabled={loading} className="w-full sm:w-auto">
+          <Button
+            onClick={generate}
+            disabled={loading}
+            className="w-full transition-transform active:scale-95 sm:w-auto"
+          >
             {loading ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (
@@ -87,12 +122,15 @@ export function TaskPlanner() {
 
       <OutputPanel
         title="Prioritized schedule"
-        description="Editable plan grouped by time block with priority rationale."
+        description="Editable plan grouped by time block with priority indicators."
         value={output}
         onChange={setOutput}
         loading={loading}
         error={error}
-        placeholder="Your prioritized schedule will appear here."
+        emptyHint="Add tasks to create your schedule"
+        placeholder="Your prioritized schedule with 🔴 🟡 🟢 indicators will appear here."
+        onRegenerate={generate}
+        onRefine={refine}
       />
     </div>
   );
