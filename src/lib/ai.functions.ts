@@ -57,6 +57,22 @@ Subject: <concise subject line>
 Adapt wording and warmth to the ${data.tone} tone and to a ${data.recipientType} audience.`;
   }
 
+  if (data.kind === "refine") {
+    const instruction =
+      data.mode === "improve"
+        ? "Rewrite it to be clearer, sharper and more professional. Keep the same structure, headings and meaning."
+        : data.mode === "shorten"
+          ? "Rewrite it to be roughly 40% shorter while keeping every important point, heading and structure."
+          : "Expand it with more helpful professional detail and context, keeping the same structure and headings. Do not invent facts, numbers, names or deadlines.";
+    return `Here is an existing draft produced for a procurement professional.
+
+DRAFT:
+${data.text}
+
+${instruction}
+Return only the rewritten draft, nothing else.`;
+  }
+
   if (data.kind === "planner") {
     return `Turn this task list into a realistic, prioritized schedule for the timeframe: ${data.timeframe}.
 
