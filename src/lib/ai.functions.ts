@@ -28,7 +28,13 @@ const NotesInput = z.object({
   notes: z.string(),
 });
 
-const Input = z.discriminatedUnion("kind", [EmailInput, PlannerInput, NotesInput]);
+const RefineInput = z.object({
+  kind: z.literal("refine"),
+  mode: z.enum(["improve", "shorten", "expand"]),
+  text: z.string().min(1),
+});
+
+const Input = z.discriminatedUnion("kind", [EmailInput, PlannerInput, NotesInput, RefineInput]);
 type Input = z.infer<typeof Input>;
 
 function buildPrompt(data: Input): string {
