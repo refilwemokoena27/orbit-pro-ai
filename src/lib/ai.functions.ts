@@ -112,6 +112,7 @@ Decisions & Deadlines
 - <decision or deadline>
 
 Rules:
+- Separate each section with a blank line, and put the heading on its own line.
 - Extract only what is present in the notes. Do not fabricate anything.
 - If no deadlines are mentioned, write exactly: No deadlines specified
 - If there are no action items, write: No action items identified`;
