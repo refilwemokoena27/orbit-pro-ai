@@ -1,358 +1,108 @@
 # ProcureFlow AI
 
-Role & Context
+A modern, AI-powered productivity dashboard built for supply chain and procurement professionals. ProcureFlow AI combines three essential workplace tools into one responsive workspace: a smart email generator, an AI task planner, and a meeting notes summarizer.
 
-You are building a modern web application for a supply chain and procurement professional who needs to automate repetitive workplace tasks using AI. The user manages supplier relationships, purchase orders, and internal coordination, and requires a single, efficient tool to improve productivity in daily operations.
-
-
+**Live demo:** [orbit-pro-ai.lovable.app](https://orbit-pro-ai.lovable.app)
 
 ---
 
+## Features
 
+### 📧 Smart Email Generator
+Turn a few bullet points into a complete, professional workplace email. Choose the recipient type (supplier, internal team, or management) and tone (formal, friendly, or persuasive), and the AI drafts a ready-to-send message with a subject line, greeting, body, and closing.
 
-Task
+### 📅 AI Task Planner / Scheduler
+Paste a raw task list and select a timeframe (today or this week). The AI prioritizes tasks by urgency, groups them realistically, and explains the rationale behind the schedule.
 
-Build a modern, responsive, single-page web application called ProcureFlow AI — an AI-powered productivity dashboard that integrates three core tools into one unified platform using a sidebar navigation layout (NOT separate applications).
-
-
-
----
-
-
-
-Core Features (Must Include All 3)
-
-
-
-1. Smart Email Generator
-
-
-
-Purpose:
-
-Generate professional workplace emails for supplier communication, purchase order follow-ups, negotiation requests, and internal updates.
-
-
-
-Inputs:
-
-
-
-- Recipient Type (Dropdown: Supplier / Internal Team / Management)
-
-- Email Purpose (Short text input)
-
-- Key Points (Textarea)
-
-- Tone Selector (Formal / Friendly / Persuasive)
-
-
-
-Output:
-
-
-
-- Complete email draft including:
-
-  - Subject line
-
-  - Greeting
-
-  - Body
-
-  - Professional closing
-
-- Displayed in an editable text box
-
-- Include a “Copy to Clipboard” button
-
-
-
-AI Logic & Behavior:
-
-
-
-- Transform user input into a clear, structured, professional email
-
-- Adapt tone based on selected option
-
-- Use workplace-appropriate language
-
-- If input is vague, still generate a complete and coherent email
-
-- Do NOT ask follow-up questions
-
-- Do NOT include placeholders like [Name]
-
-
+### 📝 Meeting Notes Summarizer
+Paste lengthy meeting notes and get a structured output with a concise summary, clear action items (with owners when mentioned), and a list of decisions and deadlines.
 
 ---
 
+## Tech Stack
 
-
-2. AI Task Planner / Scheduler
-
-
-
-Purpose:
-
-Convert a list of tasks into a structured, prioritized daily or weekly schedule.
-
-
-
-Inputs:
-
-
-
-- Task List (Textarea — one task per line)
-
-- Timeframe Selector (Today / This Week)
-
-- Optional deadlines within tasks
-
-
-
-Output:
-
-
-
-- Structured schedule grouped by day
-
-- Tasks categorized by priority:
-
-  - High
-
-  - Medium
-
-  - Low
-
-- Include a short reason/rationale for prioritization
-
-
-
-AI Logic & Behavior:
-
-
-
-- Prioritize tasks based on urgency and deadlines (not input order)
-
-- Organize output clearly for readability
-
-- Ensure realistic and practical scheduling
-
-- Do NOT invent deadlines if not provided
-
-
+- **Framework:** [TanStack Start](https://tanstack.com/start) (React 19, full-stack SSR/SSG)
+- **Router:** TanStack Router (file-based routing)
+- **Styling:** Tailwind CSS v4 with a neutral, professional SaaS palette
+- **UI Components:** Radix UI primitives + shadcn/ui conventions
+- **AI:** Lovable AI Gateway (`google/gemini-3.7-flash`) via `createServerFn`
+- **Icons:** Lucide React
+- **Build Tool:** Vite 8
 
 ---
 
+## Getting Started
 
+### Prerequisites
 
-3. Meeting Notes Summarizer
+- Node.js (preferably managed with [nvm](https://github.com/nvm-sh/nvm))
+- npm or a compatible package manager
 
-
-
-Purpose:
-
-Summarize long meeting notes into clear, actionable insights.
-
-
-
-Inputs:
-
-
-
-- Large textarea for pasting raw meeting notes
-
-
-
-Output:
-
-Clearly structured into three sections:
-
-
-
-- Summary (2–4 sentences)
-
-- Action Items (bulleted list, include owner if mentioned)
-
-- Decisions & Deadlines (bulleted list)
-
-
-
-AI Logic & Behavior:
-
-
-
-- Extract key insights accurately
-
-- Keep summary concise and professional
-
-- If no deadlines are mentioned, explicitly state:
-
-  “No deadlines specified”
-
-- Do NOT fabricate information
-
-
-
----
-
-
-
-Technical & UX Requirements
-
-
-
-- Single-page dashboard layout
-
-- Collapsible sidebar navigation (icons + labels)
-
-- Fully responsive design (mobile + desktop)
-
-- Each feature must have:
-
-  - Clearly separated input section
-
-  - Clearly separated output section
-
-- All AI outputs must:
-
-  - Be in editable text areas
-
-  - Include copy-to-clipboard functionality
-
-- Include loading indicators while AI is generating responses
-
-- Clean, modern, professional SaaS-style UI
-
-  - Neutral color palette
-
-  - Clear typography hierarchy
-
-  - Generous whitespace
-
-  - Similar feel to Notion or Linear
-
-
-
----
-
-
-
-Global AI Behavior
-
-
-
-- Always generate structured, professional outputs
-
-- Maintain clarity and workplace relevance
-
-- Do NOT hallucinate facts — if uncertain, remain neutral
-
-- Do NOT ask follow-up questions — produce best possible output
-
-
-
----
-
-
-
-Edge Case Handling
-
-
-
-- If input fields are empty → show a friendly error message
-
-- If notes or tasks are too short → still generate a meaningful result
-
-- Ensure the app never crashes due to missing or minimal input
-
-
-
----
-
-
-
-Responsible AI Requirement
-
-
-
-Include a persistent, visible disclaimer (footer or banner):
-
-
-
-«“AI-generated content may not always be accurate. Please review before use.”»
-
-
-
----
-
-
-
-Constraints
-
-
-
-- This must be ONE integrated application, not multiple apps
-
-- Do NOT merge all features into one shared input/output
-
-- Keep features functionally distinct within one dashboard
-
-- Do NOT add extra unrelated features beyond the three specified
-
-
-
----
-
-
-
-Evaluation Alignment
-
-
-
-This project is designed to demonstrate:
-
-
-
-- Practical AI implementation
-
-- Strong prompt engineering through structured AI behavior
-
-- Real-world workplace problem solving
-
-- Clean, modern UI/UX design
-
-- Functional and reliable AI-powered tools
-
-
-
-
-
-Design Style:
-
-Clean, modern, and professional — similar to a SaaS productivity platform.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://orbit-pro-ai.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/1776f91d-6418-403a-811c-257f299da2d4).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+### Install & Run
 
 ```sh
-git clone <this-repository-url>
+git clone <repository-url>
 cd <repository-name>
-npm i
+npm install
 npm run dev
 ```
+
+The dev server starts at `http://localhost:8080`.
+
+### Build for Production
+
+```sh
+npm run build
+```
+
+Preview the production build locally:
+
+```sh
+npm run preview
+```
+
+---
+
+## Project Structure
+
+```text
+src/
+├── components/procure/    # Core tool UI components
+│   ├── EmailGenerator.tsx
+│   ├── TaskPlanner.tsx
+│   └── NotesSummarizer.tsx
+├── components/ui/         # Shared shadcn/ui components
+├── lib/
+│   ├── ai.functions.ts    # Server function for AI generation
+│   └── utils.ts           # Tailwind/class utilities
+├── routes/
+│   ├── __root.tsx         # Root layout
+│   ├── index.tsx          # Dashboard with sidebar navigation
+│   └── api/               # Public/server API routes
+├── styles.css             # Global Tailwind v4 theme tokens
+└── start.ts               # App entry + server function middleware
+```
+
+---
+
+## AI Behavior
+
+All three tools share the following guidelines:
+
+- Generate structured, professional output without follow-up questions.
+- Avoid placeholders such as `[Name]` — produce a complete draft from the provided context.
+- Stay neutral rather than hallucinating facts when input is vague.
+- Surface a friendly error when required input is missing.
+- Display a persistent disclaimer: **“AI-generated content may not always be accurate. Please review before use.”**
+
+---
+
+## Deployment
+
+This project is deployed through Lovable. Connect GitHub in the Lovable editor to enable two-way sync: every change in Lovable pushes to GitHub, and commits pushed to GitHub sync back into Lovable.
+
+---
+
+## License
+
+This project was built with [Lovable](https://lovable.dev). The code is yours to modify, deploy, and extend.
