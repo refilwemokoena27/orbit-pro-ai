@@ -80,7 +80,6 @@ function Dashboard() {
   const nav = (
     <nav className="flex flex-1 flex-col gap-1 p-3">
       {TOOLS.map((tool) => {
-        const Icon = tool.icon;
         const isActive = tool.id === active;
         return (
           <button
@@ -103,7 +102,6 @@ function Dashboard() {
             <span className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-border bg-card text-xs transition-colors group-hover:border-primary/40">
               <span aria-hidden>{tool.emoji}</span>
             </span>
-            <Icon className="hidden size-0" aria-hidden />
             {!collapsed && (
               <span className="min-w-0">
                 <span className="block truncate">{tool.label}</span>
