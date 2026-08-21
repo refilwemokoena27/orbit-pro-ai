@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  CalendarClock,
-  FileText,
-  Mail,
   Menu,
   PanelLeftClose,
   PanelLeftOpen,
@@ -44,7 +41,6 @@ const TOOLS = [
     label: "Email Generator",
     hint: "Supplier & internal emails",
     emoji: "📧",
-    icon: Mail,
     title: "Smart Email Generator",
     subtitle: "Turn a few key points into a polished, ready-to-send workplace email.",
   },
@@ -53,7 +49,6 @@ const TOOLS = [
     label: "Task Planner",
     hint: "Prioritized scheduling",
     emoji: "📅",
-    icon: CalendarClock,
     title: "AI Task Planner",
     subtitle: "Convert a raw task list into a realistic, priority-ranked schedule.",
   },
@@ -62,7 +57,6 @@ const TOOLS = [
     label: "Notes Summarizer",
     hint: "Actions & decisions",
     emoji: "📝",
-    icon: FileText,
     title: "Meeting Notes Summarizer",
     subtitle: "Extract a concise summary, action items and decisions from long notes.",
   },
